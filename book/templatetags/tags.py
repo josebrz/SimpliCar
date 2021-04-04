@@ -1,6 +1,6 @@
 from django import template
 
-from django_vuejs.apps.book.models import Author
+from book.models import Author
 
 register = template.Library()
 
