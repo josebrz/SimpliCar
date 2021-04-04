@@ -11,12 +11,12 @@ urlpatterns = [
     path('auth/register/', views.register_users, name="auth-register"),
     # Book
     path('book', views.book_list_create_view, name="book-list-create"),
-    path('book', views.book_detail_view, name="book-detail"),
-    # path('book/search', views, name="book-search"),
+    path('book/<int:pk>', views.book_detail_view, name="book-detail"),
+    path('book/search', views.book_search_view, name="book-search"),
     # Author
     # path('author', views, name="book-author-list-create"),
     # path('author/<int:pk>', views, name="book-author-detail"),
     # Lead
-    #path('lead', views.lead_list_view, name='lead-list-create'),
+    path('lead', views.lead_list_create_view, name='lead-list-create')
 ]
 

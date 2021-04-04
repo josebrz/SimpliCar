@@ -1,15 +1,18 @@
-from .serializers import AuthorSerializer, BookSerializer, LeadSerializer, LibrarySerializer, TokenSerializer, UserSerializer
+from .serializers import AuthorSerializer, BookSerializer, LeadSerializer, LibrarySerializer, TokenSerializer, \
+    UserSerializer
 from .models import Book, Author, Library, Lead
 from .decorators import validate_library_data, validate_book_data
 
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework.views import status
 from rest_framework_jwt.settings import api_settings
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.core.mail import send_mail
 
 # Get the JWT settings
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -58,7 +61,85 @@ class ListCreateBookView(generics.ListCreateAPIView):
 
 
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    """
+        GET book/:id/
+        PUT book/:id/
+        """
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            book = self.queryset.get(pk=kwargs["pk"])
+            return Response(BookSerializer(book).data)
+        except Book.DoesNotExist:
+            return Response(
+                data={
+                    "message": "Book with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    @validate_book_data
+    def put(self, request, *args, **kwargs):
+        try:
+            book = self.queryset.get(pk=kwargs["pk"])
+            serializer = BookSerializer()
+            updated_book = serializer.update(book, request.data)
+            return Response(BookSerializer(updated_book).data)
+        except Book.DoesNotExist:
+            return Response(
+                data={
+                    "message": "book with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class SearchBookView(generics.ListAPIView):
+    """
+    GET search/
+    """
+    search_fields = ['title']
+    filter_backends = (filters.SearchFilter,)
+
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class ListCreateLeadView(generics.ListCreateAPIView):
+    """
+    GET Lead/
+    POST Lead/
+    """
+    queryset = Lead.objects.all()
+    serializer_class = LeadSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, *args, **kwargs):
+        # find library by pk
+        library = Library.objects.get(pk=int(request.data["library"]))
+        # Create lead
+        lead = Lead.objects.create(
+            email=request.data["email"],
+            fullname=request.data["fullname"],
+            phone=request.data["phone"],
+            library=library
+        )
+        mail = send_mail(
+            'Lead Created',
+            'Welcome to our platform of books {}'.format(lead.fullname),
+            'from@example.com',
+            [lead.email],
+            fail_silently=False
+        )
+
+        return Response(
+            data=LeadSerializer(lead).data,
+            status=status.HTTP_201_CREATED
+        )
 
 
 class ListCreateLibraryView(generics.ListCreateAPIView):
@@ -230,6 +311,9 @@ library_book_detail_view = LibraryBookDetailView.as_view()
 # Books views
 book_list_create_view = ListCreateBookView.as_view()
 book_detail_view = BookDetailView.as_view()
+book_search_view = SearchBookView.as_view()
+# Lead Views
+lead_list_create_view = ListCreateLeadView.as_view()
 # Login view
 login_view = LoginView.as_view()
 register_users = RegisterUsers.as_view()

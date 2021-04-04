@@ -86,6 +86,16 @@ class BaseViewTest(APITestCase):
             )
         )
 
+    def fetch_book(self, pk=0):
+        return self.client.get(
+            reverse(
+                "book-detail",
+                kwargs={
+                    "pk": pk
+                }
+            )
+        )
+
     def login_a_user(self, username="", password=""):
         url = reverse(
             "auth-login"
@@ -159,6 +169,7 @@ class BaseViewTest(APITestCase):
         self.create_book("Save control throughout card on town though.", author2, library2)
         self.create_book("Leg challenge campaign exactly.", author1, library1)
 
+        # Expected Values (Valid-Invalid)
         self.valid_library_data = {
             "id": 2,
             "name": "test name",
@@ -194,7 +205,40 @@ class BaseViewTest(APITestCase):
                 }
             ]
         }
-        self.valid_id = 4
+
+        self.valid_book_data_put = {
+            "id": 2,
+            "title": "Test title",
+            "author": {
+                "id": 1,
+                "first_name": "José",
+                "last_name": "Brizuela"
+            },
+            "libraries": [
+                {
+                    "id": 1,
+                    "name": "Crecer"
+                },
+            ]
+        }
+
+        self.valid_book_data_post = {
+            "id": 5,
+            "title": "Test title",
+            "author": {
+                "id": 1,
+                "first_name": "José",
+                "last_name": "Brizuela"
+            },
+            "libraries": [
+                {
+                    "id": 1,
+                    "name": "Crecer"
+                }
+            ]
+        }
+
+        self.valid_id = 1
         self.invalid_id = 11000
 
 
@@ -361,22 +405,8 @@ class AddBookTest(BaseViewTest):
             kind="post",
             data=self.valid_book_data
         )
-        expected = {
-                "id": 5,
-                "title": "Test title",
-                "author": {
-                    "id": 1,
-                    "first_name": "José",
-                    "last_name": "Brizuela"
-                },
-                "libraries": [
-                    {
-                        "id": 1,
-                        "name": "Crecer"
-                    }
-                ]
-        }
-        self.assertEqual(response.data, expected)
+
+        self.assertEqual(response.data, self.valid_book_data_post)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         # test with invalid data
         response = self.make_a_request(
@@ -407,7 +437,8 @@ class UpdateBookTest(BaseViewTest):
             pk=2,
             data=self.valid_book_data
         )
-        self.assertEqual(response.data, self.valid_book_data)
+
+        self.assertEqual(response.data, self.valid_book_data_put)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # test with invalid data
         response = self.make_a_request(
@@ -418,9 +449,33 @@ class UpdateBookTest(BaseViewTest):
         )
         self.assertEqual(
             response.data["message"],
-            "The name is required to add/update a book"
+            "The title is required to add/update a Book"
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class GetSingleBookTest(BaseViewTest):
+
+    def test_get_book_by_pk(self):
+        """
+        This test ensures that a single book of a given id is
+        returned
+        """
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.fetch_book(self.valid_id)
+        # fetch the data from db
+        expected = Book.objects.get(pk=self.valid_id)
+        serialized = BookSerializer(expected)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # test with a library that does not exist
+        response = self.fetch_book(self.invalid_id)
+        self.assertEqual(
+            response.data["message"],
+            "Book with id: 11000 does not exist"
+        )
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
 # Auth TEST

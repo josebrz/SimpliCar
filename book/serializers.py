@@ -28,11 +28,29 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = "__all__"
 
+    def update(self, instance, validated_data):
+        # We are looking for an author by id
+        author = Author.objects.get(pk=validated_data["author"]["id"])
+
+        instance.title = validated_data.get("title", instance.title)
+        instance.author = author
+        instance.libraries.set([])
+
+        # if there are libraries in the request
+        if "libraries" in validated_data:
+            for library in validated_data["libraries"]:
+                instance.libraries.add(library["id"])
+
+        # Saved Instance
+        instance.save()
+        return instance
+
 
 class LeadSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Lead
-        fields = "__all__"
+        fields = ("email", "fullname", "phone", "library")
 
 
 class TokenSerializer(serializers.Serializer):
