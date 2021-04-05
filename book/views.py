@@ -1,7 +1,7 @@
 from .serializers import AuthorSerializer, BookSerializer, LeadSerializer, LibrarySerializer, TokenSerializer, \
     UserSerializer
 from .models import Book, Author, Library, Lead
-from .decorators import validate_library_data, validate_book_data
+from .decorators import validate_library_data, validate_book_data, validate_lead_data, validate_author_data
 
 from rest_framework import generics
 from rest_framework import permissions
@@ -19,10 +19,11 @@ jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
+# BOOK VIEWS
 class ListCreateBookView(generics.ListCreateAPIView):
     """
-    GET book/
-    POST book/
+    GET /book
+    POST /book
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -62,8 +63,8 @@ class ListCreateBookView(generics.ListCreateAPIView):
 
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-        GET book/:id/
-        PUT book/:id/
+        GET /book/:id
+        PUT /book/:id
         """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -99,7 +100,7 @@ class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class SearchBookView(generics.ListAPIView):
     """
-    GET search/
+    GET /search
     """
     search_fields = ['title']
     filter_backends = (filters.SearchFilter,)
@@ -109,15 +110,76 @@ class SearchBookView(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
 
+# AUTHOR VIEWS
+class ListCreateAuthorView(generics.ListCreateAPIView):
+    """
+    GET /author
+    POST /author
+    """
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    @validate_author_data
+    def post(self, request, *args, **kwargs):
+        author = Author.objects.create(
+            first_name=request.data["first_name"],
+            last_name=request.data["last_name"]
+        )
+        return Response(
+            data=AuthorSerializer(author).data,
+            status=status.HTTP_201_CREATED
+        )
+
+
+class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET /author/:id
+    PUT /author/:id
+    """
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            author = self.queryset.get(pk=kwargs["pk"])
+            return Response(AuthorSerializer(author).data)
+        except Author.DoesNotExist:
+            return Response(
+                data={
+                    "message": "Author with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    @validate_author_data
+    def put(self, request, *args, **kwargs):
+        try:
+            author = self.queryset.get(pk=kwargs["pk"])
+            serializer = AuthorSerializer()
+            updated_library = serializer.update(author, request.data)
+            return Response(AuthorSerializer(updated_library).data)
+        except Author.DoesNotExist:
+            return Response(
+                data={
+                    "message": "Author with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+
+# LEAD VIEWS
 class ListCreateLeadView(generics.ListCreateAPIView):
     """
-    GET Lead/
-    POST Lead/
+    GET /lead
+    POST /lead
     """
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
     permission_classes = (permissions.AllowAny,)
 
+    @validate_lead_data
     def post(self, request, *args, **kwargs):
         # find library by pk
         library = Library.objects.get(pk=int(request.data["library"]))
@@ -142,10 +204,11 @@ class ListCreateLeadView(generics.ListCreateAPIView):
         )
 
 
+# LIBRARY VIEWS
 class ListCreateLibraryView(generics.ListCreateAPIView):
     """
-    GET libraries/
-    POST library/
+    GET /library
+    POST /library
     """
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
@@ -164,8 +227,8 @@ class ListCreateLibraryView(generics.ListCreateAPIView):
 
 class LibraryDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-    GET library/:id/
-    PUT library/:id/
+    GET /library/:id
+    PUT /library/:id
     """
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
@@ -201,7 +264,7 @@ class LibraryDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class LibraryBookDetailView(generics.RetrieveAPIView):
     """
-    GET library/:id/books/:id
+    GET /library/:id/books/:id
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -226,26 +289,10 @@ class LibraryBookDetailView(generics.RetrieveAPIView):
         )
 
 
-# class LeadListView(generics.ListAPIView):
-#     paginate_by = 10
-#     model = Lead
-#     context_object_name = 'leads'
-#
-#     queryset = Lead.objects.all()
-#     serializer_class = LeadSerializer
-#
-#     def get_queryset(self):
-#         qs = super(LeadListView, self).get_queryset()
-#         qs.order_by('email')
-#         return qs
-
-
-# book_list_view = BookListView.as_view()
-# author_list_view = AuthorListView.as_view()
-
+# lOGIN VIEW
 class LoginView(generics.CreateAPIView):
     """
-    POST auth/login/
+    POST /auth/login
     """
     # This permission class will over ride the global permission
     # class setting
@@ -277,9 +324,10 @@ class LoginView(generics.CreateAPIView):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
+# REGISTER VIEW
 class RegisterUsers(generics.CreateAPIView):
     """
-    POST auth/register/
+    POST /auth/register
     """
     permission_classes = (permissions.AllowAny,)
     serializer_class = UserSerializer
@@ -314,8 +362,11 @@ book_detail_view = BookDetailView.as_view()
 book_search_view = SearchBookView.as_view()
 # Lead Views
 lead_list_create_view = ListCreateLeadView.as_view()
+# Author Views
+author_list_create_view = ListCreateAuthorView.as_view()
+author_detail_view = AuthorDetailView.as_view()
 # Login view
 login_view = LoginView.as_view()
 register_users = RegisterUsers.as_view()
 
-# lead_list_view = LeadListView.as_view()
+

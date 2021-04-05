@@ -8,14 +8,14 @@ urlpatterns = [
     path('library/<int:pk>/books/<int:book_pk>', views.library_book_detail_view, name='library-book-list'),
     # Login/Register
     path('auth/login', views.login_view, name="auth-login"),
-    path('auth/register/', views.register_users, name="auth-register"),
+    path('auth/register', views.register_users, name="auth-register"),
     # Book
     path('book', views.book_list_create_view, name="book-list-create"),
     path('book/<int:pk>', views.book_detail_view, name="book-detail"),
     path('book/search', views.book_search_view, name="book-search"),
     # Author
-    # path('author', views, name="book-author-list-create"),
-    # path('author/<int:pk>', views, name="book-author-detail"),
+    path('author', views.author_list_create_view, name="author-list-create"),
+    path('author/<int:pk>', views.author_detail_view, name="author-detail"),
     # Lead
     path('lead', views.lead_list_create_view, name='lead-list-create')
 ]

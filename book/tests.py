@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
 
 from .models import Library, Lead, Book, Author
-from .serializers import LibrarySerializer, BookSerializer
+from .serializers import LibrarySerializer, BookSerializer, AuthorSerializer
 
 
 class BaseViewTest(APITestCase):
@@ -65,6 +65,16 @@ class BaseViewTest(APITestCase):
         else:
             return None
 
+    def fetch_author(self, pk=0):
+        return self.client.get(
+            reverse(
+                "author-detail",
+                kwargs={
+                    "pk": pk
+                }
+            )
+        )
+
     def fetch_library(self, pk=0):
         return self.client.get(
             reverse(
@@ -95,6 +105,14 @@ class BaseViewTest(APITestCase):
                 }
             )
         )
+
+    def search_books(self, param):
+        return self.client.get(
+             path='http://127.0.0.1:8000/api/book/search',
+             data={
+                 'text': param
+             }
+            )
 
     def login_a_user(self, username="", password=""):
         url = reverse(
@@ -170,6 +188,23 @@ class BaseViewTest(APITestCase):
         self.create_book("Leg challenge campaign exactly.", author1, library1)
 
         # Expected Values (Valid-Invalid)
+        self.valid_author_data = {
+            "id": 2,
+            "first_name": "test first_name",
+            "last_name": "test last_name",
+        }
+        self.valid_author_data_post = {
+            "id": 5,
+            "first_name": "test first_name",
+            "last_name": "test last_name",
+        }
+
+        self.invalid_author_data = {
+            "id": 2,
+            "first_name": "",
+            "last_name": "",
+        }
+
         self.valid_library_data = {
             "id": 2,
             "name": "test name",
@@ -237,9 +272,101 @@ class BaseViewTest(APITestCase):
                 }
             ]
         }
+        self.valid_lead_data_post = {
+            "email": "test@test.com",
+            "fullname": "test test",
+            "phone": "123456",
+            "library": 1
+        }
+        self.invalid_lead_data = {
+            "email": "",
+            "fullname": "",
+            "phone": "",
+            "library": 1
+        }
 
         self.valid_id = 1
         self.invalid_id = 11000
+
+
+# Author TESTs
+class GetSingleAuthorTest(BaseViewTest):
+
+    def test_get_author_by_pk(self):
+        """
+        This test ensures that a single author of a given id is
+        returned
+        """
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.fetch_author(self.valid_id)
+        # fetch the data from db
+        expected = Author.objects.get(pk=self.valid_id)
+        serialized = AuthorSerializer(expected)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # test with a author that does not exist
+        response = self.fetch_author(self.invalid_id)
+        self.assertEqual(
+            response.data["message"],
+            "Author with id: 11000 does not exist"
+        )
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class UpdateAuthorTest(BaseViewTest):
+
+    def test_put_library_by_pk(self):
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.make_a_request(
+            view_name="author-detail",
+            kind='put',
+            pk=2,
+            data=self.valid_author_data
+        )
+        self.assertEqual(response.data, self.valid_author_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # test with invalid data
+        response = self.make_a_request(
+            view_name="author-detail",
+            kind="put",
+            pk=3,
+            data=self.invalid_author_data
+        )
+        self.assertEqual(
+            response.data["message"],
+            "The first name and last name is required to add a Author"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class AddAuthorTest(BaseViewTest):
+
+    def test_post_author(self):
+        """
+        This test ensures that a single author can be added
+        """
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.make_a_request(
+            view_name="author-list-create",
+            kind="post",
+            data=self.valid_author_data
+        )
+        self.assertEqual(response.data, self.valid_author_data_post)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        # test with invalid data
+        response = self.make_a_request(
+            view_name="author-list-create",
+            kind="post",
+            data=self.invalid_author_data
+        )
+        self.assertEqual(
+            response.data["message"],
+            "The first name and last name is required to add a Author"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 # Library TESTs
@@ -476,6 +603,46 @@ class GetSingleBookTest(BaseViewTest):
             "Book with id: 11000 does not exist"
         )
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class SearchBookTest(BaseViewTest):
+
+    def test_search_book_by_param(self):
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.search_books('throughout')
+        # fetch the data from db
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+# Lead TEST
+class AddLeadTest(BaseViewTest):
+
+    def test_post_lead(self):
+        """
+        This test ensures that a single lead can be added
+        """
+        self.login_client('test_user', 'testing')
+        # hit the API endpoint
+        response = self.make_a_request(
+            view_name="lead-list-create",
+            kind="post",
+            data=self.valid_lead_data_post
+        )
+
+        self.assertEqual(response.data, self.valid_lead_data_post)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        # test with invalid data
+        response = self.make_a_request(
+            view_name="lead-list-create",
+            kind="post",
+            data=self.invalid_lead_data
+        )
+        self.assertEqual(
+            response.data["message"],
+            "The email is required to add a Lead"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 # Auth TEST
