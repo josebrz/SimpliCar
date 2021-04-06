@@ -177,7 +177,7 @@ class ListCreateLeadView(generics.ListCreateAPIView):
     """
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     @validate_lead_data
     def post(self, request, *args, **kwargs):
@@ -190,7 +190,7 @@ class ListCreateLeadView(generics.ListCreateAPIView):
             phone=request.data["phone"],
             library=library
         )
-        mail = send_mail(
+        send_mail(
             'Lead Created',
             'Welcome to our platform of books {}'.format(lead.fullname),
             'from@example.com',

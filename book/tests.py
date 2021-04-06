@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
 
-from .models import Library, Lead, Book, Author
+from .models import Library, Book, Author
 from .serializers import LibrarySerializer, BookSerializer, AuthorSerializer
 
 

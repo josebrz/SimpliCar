@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "57ec74c7-fc5a-4b09-aac2-dd87f2900879",
+		"name": "SimpliCar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Library",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/library/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"library",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Library",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Crecer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/library",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"library"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Library",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Decrecer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/library/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"library",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Library-Book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/library/13/books/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"library",
+						"13",
+						"books",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n        \"title\": \"Week various share never list.\",\r\n        \"author\": {\r\n            \"id\": 61,\r\n            \"first_name\": \"Anna\",\r\n            \"last_name\": \"Taylor\"\r\n        },\r\n        \"libraries\": [\r\n            {\r\n                \"id\": 12,\r\n                \"name\": \"Brian Hart\"\r\n            },\r\n            {\r\n                \"id\": 30,\r\n                \"name\": \"Alexis Holland\"\r\n            },\r\n            {\r\n                \"id\": 38,\r\n                \"name\": \"Jeffrey Moore\"\r\n            },\r\n            {\r\n                \"id\": 39,\r\n                \"name\": \"Patricia Gates\"\r\n            },\r\n            {\r\n                \"id\": 43,\r\n                \"name\": \"Natasha Frank\"\r\n            },\r\n            {\r\n                \"id\": 51,\r\n                \"name\": \"Jennifer Thomas\"\r\n            },\r\n            {\r\n                \"id\": 70,\r\n                \"name\": \"Jonathan Graves\"\r\n            },\r\n            {\r\n                \"id\": 76,\r\n                \"name\": \"William Martin\"\r\n            },\r\n            {\r\n                \"id\": 86,\r\n                \"name\": \"William Marsh\"\r\n            },\r\n            {\r\n                \"id\": 94,\r\n                \"name\": \"Jon Brooks\"\r\n            }\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Book",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"author\": {\r\n        \"id\": 23,\r\n        \"first_name\": \"Anna\",\r\n        \"last_name\": \"Taylor\"\r\n    },\r\n    \"libraries\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"Jeffrey Moore\"\r\n        },\r\n        {\r\n            \"id\": 39,\r\n            \"name\": \"Patricia Gates\"\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"Natasha Frank\"\r\n        },\r\n        {\r\n            \"id\": 51,\r\n            \"name\": \"Jennifer Thomas\"\r\n        },\r\n        {\r\n            \"id\": 70,\r\n            \"name\": \"Jonathan Graves\"\r\n        },\r\n        {\r\n            \"id\": 76,\r\n            \"name\": \"William Martin\"\r\n        },\r\n        {\r\n            \"id\": 86,\r\n            \"name\": \"William Marsh\"\r\n        },\r\n        {\r\n            \"id\": 94,\r\n            \"name\": \"Jon Brooks\"\r\n        }\r\n    ],\r\n    \"title\": \"Week various share never list.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH Book",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "text",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/search?text=Week various share never list.",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"search"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "Week various share never list."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Lead",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"fullname\": \"test TESTING\",\r\n    \"phone\": \"123456\",\r\n    \"library\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/lead",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"lead"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/author/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"author",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"test first_name\",\r\n    \"last_name\": \"test last_name\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/author",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Author",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"first_name\": \"test Hola\",\r\n    \"last_name\": \"test Mundo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/author/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"author",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login-auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Register-auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"testing\",\r\n    \"password\": \"testing\",\r\n    \"email\": \"testing@testing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/auth/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api-token-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api-token-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Impvc2UiLCJleHAiOjE2MjAwODE1NDEsImVtYWlsIjoiam9zZUBqb3NlLmNvbSJ9.05nIg6VXy-FgNtZYun1-lWhFiKjUvZn96LeVmqHBruw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

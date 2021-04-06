@@ -8,7 +8,7 @@ urlpatterns = [
     path('library/<int:pk>/books/<int:book_pk>', views.library_book_detail_view, name='library-book-list'),
     # Login/Register
     path('auth/login', views.login_view, name="auth-login"),
-    path('auth/register', views.register_users, name="auth-register"),
+    path('auth/register/', views.register_users, name="auth-register"),
     # Book
     path('book', views.book_list_create_view, name="book-list-create"),
     path('book/<int:pk>', views.book_detail_view, name="book-detail"),
