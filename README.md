@@ -83,13 +83,13 @@ Build REST API with the following endpoints and actions:
 
 ### Built With
 
-●	Python 3
-●	Django
-●	Django REST framework
-●	JWT ó API KEY
-●	Unit test
-●	Docker
-●	Automatic email sending
+*	Python 3
+*	Django
+*	Django REST framework
+*	JWT ó API KEY
+*	Unit test
+*	Docker
+*	Automatic email sending
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -149,9 +149,10 @@ To get a local copy up and running follow these simple example steps.
   you can check it by entering that box with the password "simpli12345"
 * In the code you can test the different TEST that I have created by running the command "python manage.py test"
 
-###NOTE
-The port set is 0.0.0.0:8000 but the port that must be used in the browser is 127.0.0.1:8000,
- in postman the requests are well configured and you should not modify them
+    ---------------------------------------------------o---------------------------------------------------
+## Note
+* The port set is 0.0.0.0:8000 but the port that must be used in the browser is 127.0.0.1:8000,
+  in postman the requests are well configured and you should not modify them
 
 
 <!-- CONTACT -->
