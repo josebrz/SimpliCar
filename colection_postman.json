@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/library/1",
+					"raw": "http://127.0.0.1:8000/api/library/1",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -44,7 +44,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/library",
+					"raw": "http://127.0.0.1:8000/api/library",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -76,7 +76,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/library/1",
+					"raw": "http://127.0.0.1:8000/api/library/1",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -100,7 +100,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/library/13/books/3",
+					"raw": "http://127.0.0.1:8000/api/library/13/books/3",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -135,7 +135,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/book",
+					"raw": "http://127.0.0.1:8000/api/book",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -158,7 +158,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/book/2",
+					"raw": "http://127.0.0.1:8000/api/book/2",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -191,7 +191,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/book/1",
+					"raw": "http://127.0.0.1:8000/api/book/1",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -221,7 +221,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/book/search?text=Week various share never list.",
+					"raw": "http://127.0.0.1:8000/api/book/search?text=Week various share never list.",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -260,7 +260,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/lead",
+					"raw": "http://127.0.0.1:8000/api/lead",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -283,7 +283,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/author/1",
+					"raw": "http://127.0.0.1:8000/api/author/1",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -316,7 +316,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/author",
+					"raw": "http://127.0.0.1:8000/api/author",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -348,7 +348,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/author/1",
+					"raw": "http://127.0.0.1:8000/api/author/1",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -381,7 +381,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/auth/login",
+					"raw": "http://127.0.0.1:8000/api/auth/login",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -414,7 +414,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api/auth/register/",
+					"raw": "http://127.0.0.1:8000/api/auth/register/",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -448,7 +448,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/api-token-auth/",
+					"raw": "http://127.0.0.1:8000/api-token-auth/",
 					"protocol": "http",
 					"host": [
 						"0",

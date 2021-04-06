@@ -140,14 +140,19 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* Open http:// 0.0.0.0:8000/api/auth/register and register your user
-* Open http:// 0.0.0.0:8000/api-token-auth/ and crate your token with your username and password and copy the token(ctrl + c)
+* Open http://127.0.0.1:8000/api/auth/register and register your user
+* Open http://127.0.0.1:8000/api-token-auth/ and crate your token with your username and password and copy the token(ctrl + c)
 * Using Postman and import file colection_postman.json and set Authorization with type "Bearer Token" and past your token in
   and paste your token in the Token box, here you can test the different end points
 * In the post endpoint you can change the request to GET and get all the records from the table
 * When creating a Lead an email will be sent to the message box of "simplicartestapp@gmail.com",
   you can check it by entering that box with the password "simpli12345"
 * In the code you can test the different TEST that I have created by running the command "python manage.py test"
+
+####NOTE
+The port set is 0.0.0.0:8000 but the port that must be used in the browser is 127.0.0.1:8000,
+ in postman the requests are well configured and you should not modify them
+
 
 <!-- CONTACT -->
 ## Contact
