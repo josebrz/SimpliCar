@@ -343,13 +343,30 @@ class RegisterUsers(generics.CreateAPIView):
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )
-        new_user = User.objects.create_user(
-            username=username, password=password, email=email
-        )
-        return Response(
-            data=UserSerializer(new_user).data,
-            status=status.HTTP_201_CREATED
-        )
+        user_email_exist = User.objects.filter(email=email)
+        user_username_exist = User.objects.filter(username=username)
+        if not user_email_exist and not user_username_exist:
+            new_user = User.objects.create_user(
+                username=username, password=password, email=email
+            )
+            return Response(
+                data=UserSerializer(new_user).data,
+                status=status.HTTP_201_CREATED
+            )
+        if user_email_exist:
+            return Response(
+                data={
+                    "message": "User with email {} it already exists".format(email)
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        elif user_username_exist:
+            return Response(
+                data={
+                    "message": "User with username {} it already exists".format(username)
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 # Libraries views

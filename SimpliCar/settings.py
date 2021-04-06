@@ -27,7 +27,7 @@ SECRET_KEY = '$v18cgsw-6_)4(da(7yyzd^cm=z9jiejqxltb2-27f$t=k$fe_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 # Email settings
 EMAIL_USE_TLS = True
