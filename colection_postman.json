@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "57ec74c7-fc5a-4b09-aac2-dd87f2900879",
+		"_postman_id": "c6652dac-ec63-4c2b-91ad-afafcd820dc9",
 		"name": "SimpliCar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,10 +14,10 @@
 					"raw": "http://127.0.0.1:8000/api/library/1",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -47,10 +47,10 @@
 					"raw": "http://127.0.0.1:8000/api/library",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -79,10 +79,10 @@
 					"raw": "http://127.0.0.1:8000/api/library/1",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -103,10 +103,10 @@
 					"raw": "http://127.0.0.1:8000/api/library/13/books/3",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -138,10 +138,10 @@
 					"raw": "http://127.0.0.1:8000/api/book",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -161,10 +161,10 @@
 					"raw": "http://127.0.0.1:8000/api/book/2",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -194,10 +194,10 @@
 					"raw": "http://127.0.0.1:8000/api/book/1",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -224,10 +224,10 @@
 					"raw": "http://127.0.0.1:8000/api/book/search?text=Week various share never list.",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -263,10 +263,10 @@
 					"raw": "http://127.0.0.1:8000/api/lead",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -286,10 +286,10 @@
 					"raw": "http://127.0.0.1:8000/api/author/1",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -319,10 +319,10 @@
 					"raw": "http://127.0.0.1:8000/api/author",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -351,10 +351,10 @@
 					"raw": "http://127.0.0.1:8000/api/author/1",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -384,10 +384,10 @@
 					"raw": "http://127.0.0.1:8000/api/auth/login",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -406,7 +406,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"email\": \"aad@admin.com\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"email\": \"admin@admin.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -417,10 +417,10 @@
 					"raw": "http://127.0.0.1:8000/api/auth/register/",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -451,10 +451,10 @@
 					"raw": "http://127.0.0.1:8000/api-token-auth/",
 					"protocol": "http",
 					"host": [
+						"127",
 						"0",
 						"0",
-						"0",
-						"0"
+						"1"
 					],
 					"port": "8000",
 					"path": [
@@ -471,7 +471,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Impvc2UiLCJleHAiOjE2MjAwODE1NDEsImVtYWlsIjoiam9zZUBqb3NlLmNvbSJ9.05nIg6VXy-FgNtZYun1-lWhFiKjUvZn96LeVmqHBruw",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjIwMjcyNTk1LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.LtJrHpT3Ly5ve9vesAPSKOZ1Yp_ye9LOjAblCC9FlDw",
 				"type": "string"
 			}
 		]
